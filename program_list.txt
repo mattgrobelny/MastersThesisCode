@@ -1,0 +1,25 @@
+#
+# Program List
+# List of programs used for analysis
+#
+
+# Assemblers 454
+newbler
+SPades
+
+# Assemblers Sanger
+phredPhrap
+
+# Fasta scripts
+seq_crumbs
+
+# Aligner
+GSNAP - 2016-11-07
+http://research-pub.gene.com/gmap/
+
+# Annotation
+Maker
+
+# Scripting Languages
+perl
+R

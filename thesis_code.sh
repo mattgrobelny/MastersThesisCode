@@ -5,8 +5,10 @@
 
 # If true run 454 newbler assembly optimization
 calculate_opi_454_asm=0
+ls
 
-calculate_opi_spades_asm=1
+# Run spades assember with 454 data
+calculate_opi_spades_asm=0
 
 ################################################################################
 if (($calculate_opi_454_asm == "1"))

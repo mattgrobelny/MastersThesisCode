@@ -2,12 +2,12 @@
 # requires seq_crumbs
 # requires SPades
 
-files="mid_MID1.sff"
-# mid_MID2.sff
-# mid_MID3.sff
-# mid_MID4.sff
-# mid_MID5.sff
-# mid_MID6.sff"
+files="mid_MID1.sff
+mid_MID2.sff
+mid_MID3.sff
+mid_MID4.sff
+mid_MID5.sff
+mid_MID6.sff"
 
 
 # location of inpurt mid files
