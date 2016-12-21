@@ -11,14 +11,13 @@ SPades
 phredPhrap
 
 # Fasta scripts
-seq_crumbs
+seq_crumbs - https://bioinf.comav.upv.es/seq_crumbs/
 
 # Aligner
-GSNAP - 2016-11-07
-http://research-pub.gene.com/gmap/
+GSNAP - 2016-11-07 http://research-pub.gene.com/gmap/
 
 # Annotation
-Maker
+MAKER
 
 # Scripting Languages
 perl

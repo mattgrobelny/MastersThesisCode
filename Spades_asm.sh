@@ -2,13 +2,13 @@
 # requires seq_crumbs
 # requires SPades
 
-files="mid_MID1.sff"
-# mid_MID2.sff
-# mid_MID3.sff
-# mid_MID4.sff
-# mid_MID5.sff
-# mid_MID6.sff"
-#
+files="mid_MID1.sff
+mid_MID2.sff
+mid_MID3.sff
+mid_MID4.sff
+mid_MID5.sff
+mid_MID6.sff"
+
 
 # location of inpurt mid files
 mid_file_dir='/home/mgrobelny/Scripts/github/Thesis_code/454_raw_reads/'
@@ -26,6 +26,7 @@ time=$(date)
 echo $time > $output_dir_local$file_out_text
 echo "Cleaning of:" >> $output_dir_local$file_out_text
 echo $files >> $output_dir_local$file_out_text
+echo "#-------------------------------------------------------------------------------#" >> $output_dir_local$file_out_text
 
 for file in $files;
 do
@@ -40,6 +41,7 @@ do
 	# Location of input mid file
 	working_file=$mid_file_dir$file
 	echo "working on $file"
+	echo "# Cleaning and Assembly Stats for: $file #" >> $output_dir_local$file_out_text
 
 	# extract file name string
 	fastq=".fastq"
@@ -124,7 +126,9 @@ do
 	out_file_asm="Spades_output_trimmed_careful_"
 	if (("$filename" == "mid_MID6"));
 	then
-	spades.py --trusted-contigs ~/Desktop/Spades_run/trust.fasta -m 10 -t 16 --careful --s1 $filename_out3 -o $output_dir$out_file_asm$filename
+		# Assemble using sanger seq contigs as guides
+		trust_contigs_167d17="167d17_trust.fasta"
+		spades.py --trusted-contigs $output_dir_local$trust_contigs_167d17 -m 10 -t 16 --careful --s1 $filename_out3 -o $output_dir$out_file_asm$filename
 
 	else
 	spades.py -m 10 -t 16 --careful --s1 $filename_out3 -o $output_dir$out_file_asm$filename
@@ -147,6 +151,8 @@ do
 	# Calculate stats
 	kmer_size_for_stats=25
 	calculate_stats -k $kmer_size_for_stats -o $output_dir$out_file_asm$filename$stat_file_out $output_dir$out_file_asm$filename$contigs_file
+
+	# grab only first 8 lines of stats (skipping first 3 lines)
 	stats=$(cat $output_dir$out_file_asm$filename$stat_file_out |tail -n +3 | head -n 8)
 	echo "$stats" >> $output_dir_local$file_out_text
 	echo "	" >> $output_dir_local$file_out_text
