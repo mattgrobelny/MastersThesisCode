@@ -7,7 +7,7 @@
 calculate_opi_454_asm=0
 
 # Run spades assember with 454 data (SPades)
-calculate_opi_spades_asm=0
+calculate_opi_spades_asm=1
 
 # Run Sanger data assembly (PhredPhrap)
 run_phredPhrap=0

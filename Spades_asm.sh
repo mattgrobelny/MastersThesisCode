@@ -2,13 +2,13 @@
 # requires seq_crumbs
 # requires SPades
 
-files="mid_MID1.sff
-mid_MID2.sff
-mid_MID3.sff
-mid_MID4.sff
-mid_MID5.sff
-mid_MID6.sff"
-
+files="mid_MID1.sff"
+# mid_MID2.sff
+# mid_MID3.sff
+# mid_MID4.sff
+# mid_MID5.sff
+# mid_MID6.sff"
+#
 
 # location of inpurt mid files
 mid_file_dir='/home/mgrobelny/Scripts/github/Thesis_code/454_raw_reads/'
@@ -140,8 +140,15 @@ do
 	#write contig stats to file
 	echo "	" >> $output_dir_local$file_out_text
 	echo "Contig stats for assembly: $filename_out3" >> $output_dir_local$file_out_text
-	echo "Total contigs: $num_contigs" >> $output_dir_local$file_out_text
-	echo "Largest contig: $largest_contig" >> $output_dir_local$file_out_text
+	stat_file_out="_stats.txt"
+	# echo "Total contigs: $num_contigs" >> $output_dir_local$file_out_text
+	# echo "Largest contig: $largest_contig" >> $output_dir_local$file_out_text
+
+	# Calculate stats
+	kmer_size_for_stats=25
+	calculate_stats -k $kmer_size_for_stats -o $output_dir$out_file_asm$filename$stat_file_out $output_dir$out_file_asm$filename$contigs_file
+	stats=$(cat $output_dir$out_file_asm$filename$stat_file_out |tail -n +3 | head -n 8)
+	echo "$stats" >> $output_dir_local$file_out_text
 	echo "	" >> $output_dir_local$file_out_text
 	echo "#-------------------------------------------------------------------------------#" >> $output_dir_local$file_out_text
 
