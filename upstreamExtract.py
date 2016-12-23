@@ -64,19 +64,23 @@ for line in gff_f_h:
     # split tabs
     line_split = line.split('\t')
     if len(line_split) > 1:
-
-        if line_split[2] == 'CDS':
-            product = re.findall(';product=(.+);protein_id', line)
+        if line_split[2] == 'mRNA':
+            product = re.findall(';product=(.+);start_range', line)
             if product not in gene_list:
                 upstream_val =0
-                run_me='upstream_val= int(line_split[3]) %s int(upstream_seq_len)' % line_split[6]
-                exec(run_me)
                 gene_list.append(product)
-                gene_list_w_cord.append([product[0],line_split[6],line_split[3],upstream_val])
+                if line_split[6] == '-':
+                    upstream_val= int(line_split[4]) + int(upstream_seq_len)
+                    gene_list_w_cord.append([product[0],line_split[6],line_split[4], upstream_val])
+                else:
+                    upstream_val= int(line_split[3]) - int(upstream_seq_len)
+                    gene_list_w_cord.append([product[0],line_split[6],upstream_val,line_split[3]])
             else:
                 continue
     else:
         continue
+
+
 gff_f_h.close
 
 # output tsv of gene list w cords to terminal

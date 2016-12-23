@@ -12,6 +12,8 @@ calculate_opi_spades_asm=1
 # Run Sanger data assembly (PhredPhrap)
 run_phredPhrap=0
 
+# Run all upstream seq extract 
+
 ################################################################################
 if (($calculate_opi_454_asm == "1"))
 	then

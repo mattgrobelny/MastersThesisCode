@@ -26,6 +26,12 @@ for opt, arg in opts:
         print "Goals:"
         print "Extract the the sequence upstream of genes according to cordinates file"
         print "Output fasta file of upstream seqs with correct frame 5' to 3'"
+        print """                                                                \n
+        -200                            0                                    End \n
+        |                               |                                      |
+        #--------upstream_seq-----------#######################################  \n
+                                                       mRNA seq                  \n
+        """   
         print "\n"
 
         sys.exit()
@@ -68,7 +74,7 @@ for line in coordinates_file_fh:
     if line_split[1] == "-":
         fasta_out = '>'+ fasta_name + "_" + line_split[0] + "_" + "Range:" + str(line_split[3])+"-"+str(line_split[2])+ "_Upstream_len:" + str(upstream_seq_len[0])
         output_file_fh.write(fasta_out + '\n')
-        seq_out = seq[int(line_split[3]):int(line_split[2])].reverse_complement()
+        seq_out = seq[int(line_split[2]):int(line_split[3])].reverse_complement()
         output_file_fh.write(str(seq_out)+ '\n')
     else:
         fasta_out = '>'+ fasta_name + "_" + line_split[0] + "_" + "Range:" + str(line_split[2])+"-"+str(line_split[3])+ "_Upstream_len:" + str(upstream_seq_len[0])
