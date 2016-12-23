@@ -31,10 +31,13 @@ for opt, arg in opts:
         sys.exit()
     elif opt in ("-c"):
         coordinates_file = arg
+        output_file = coordinates_file[0:-4] +".fasta"
     elif opt in ("-f"):
         seq_fasta = arg
     elif opt in ("-n"):
         fasta_name = arg
+    elif opt in ("-o"):
+        output_file = arg
 #print "Input Sequence file:", seq_fasta
 #print "Upstream coordinates_file:", coordinates_file
 fasta_name = seq_fasta.split("/")[-1][0:-6]
@@ -45,6 +48,7 @@ for seq_record in SeqIO.parse(seq_fasta,'fasta'):
     seq=seq_record.seq
 
 coordinates_file_fh = open(coordinates_file, 'r')
+output_file_fh = open(output_file, 'w')
 
 upstream_seq_len= re.findall('_([0-9]+).tsv',coordinates_file.split("/")[-1])
 
@@ -63,9 +67,13 @@ for line in coordinates_file_fh:
 
     if line_split[1] == "-":
         fasta_out = '>'+ fasta_name + "_" + line_split[0] + "_" + "Range:" + str(line_split[3])+"-"+str(line_split[2])+ "_Upstream_len:" + str(upstream_seq_len[0])
-        print fasta_out
-        print seq[int(line_split[3]):int(line_split[2])].reverse_complement()
+        output_file_fh.write(fasta_out + '\n')
+        seq_out = seq[int(line_split[3]):int(line_split[2])].reverse_complement()
+        output_file_fh.write(str(seq_out)+ '\n')
     else:
         fasta_out = '>'+ fasta_name + "_" + line_split[0] + "_" + "Range:" + str(line_split[2])+"-"+str(line_split[3])+ "_Upstream_len:" + str(upstream_seq_len[0])
-        print fasta_out
-        print seq[int(line_split[2]):int(line_split[3])]
+        output_file_fh.write(fasta_out+ '\n')
+        seq_out = seq[int(line_split[2]):int(line_split[3])]
+        output_file_fh.write(str(seq_out)+ '\n')
+coordinates_file_fh.close
+output_file_fh.close
