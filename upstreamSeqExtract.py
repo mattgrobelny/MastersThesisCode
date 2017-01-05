@@ -26,12 +26,13 @@ for opt, arg in opts:
         print "Goals:"
         print "Extract the the sequence upstream of genes according to cordinates file"
         print "Output fasta file of upstream seqs with correct frame 5' to 3'"
-        print """                                                                \n
+        print """Example output:                                                 \n
         -200                            0                                    End \n
         |                               |                                      |
         #--------upstream_seq-----------#######################################  \n
-                                                       mRNA seq                  \n
-        """   
+                                                      mRNA seq                  \n
+
+        """
         print "\n"
 
         sys.exit()
