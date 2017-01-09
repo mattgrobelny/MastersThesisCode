@@ -10,6 +10,9 @@ SPades
 # Assemblers Sanger
 phredPhrap
 
+# Contig Assembler
+Cap3
+
 # Fasta scripts
 seq_crumbs - https://bioinf.comav.upv.es/seq_crumbs/
 
